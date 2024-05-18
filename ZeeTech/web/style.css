@@ -1,0 +1,40 @@
+* {
+font-family: 'Black Ops One', cursive;
+font-family: 'Kanit', sans-serif;
+font-family: 'Share Tech Mono', monospace;
+}
+
+body{
+    /* overflow: hidden; */
+}
+
+nav div img {
+    height: 50%;
+    cursor: pointer;
+}
+.caption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40dvh;
+    font-weight: bolder;
+
+}
+.carousel-item{
+    height: 95vh;
+}
+
+.nav-link:hover {
+    color: aqua !important;
+    font-size: 20px;
+}
+.navbar-brand:hover {
+    color: aqua !important;
+}
+nav{
+    padding: 2px 2px;
+    height:5vh;
+}
+
