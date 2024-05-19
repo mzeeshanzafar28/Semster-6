@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Modal, Text, TextInput, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./navigation/AppNavigator";
 import { DefaultTheme } from "@react-navigation/native";
 import { setApiBaseUrl } from "@utils/constants";
 import { RefreshProvider } from '@utils/refresh';
+import HackerLoginForm from '@screens/hackerloginform';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -22,23 +23,29 @@ const MyTheme = {
 export default function App() {
   const [modalVisible, setModalVisible] = useState(true);
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [modalClosed, setModalClosed] = useState(false); // Track whether the modal is closed
 
   const handleCloseModal = () => {
     setModalVisible(false);
+    setModalClosed(true); // Set modalClosed to true when modal is closed
   };
 
   const handleSetBaseUrl = () => {
-
     const apiUrl = `${websiteUrl}/wp-json/wp/v2/`;
-
     setApiBaseUrl(apiUrl);
-
     handleCloseModal();
   };
+
+  useEffect(() => {
+    if (modalClosed) {
+      setModalClosed(false); // Reset modalClosed state
+    }
+  }, [modalClosed]);
 
   return (
     <RefreshProvider>
       <NavigationContainer theme={MyTheme}>
+        {/* <Text>{!modalVisible && <HackerLoginForm />}</Text> */}
         <Modal
           animationType="slide"
           transparent={true}

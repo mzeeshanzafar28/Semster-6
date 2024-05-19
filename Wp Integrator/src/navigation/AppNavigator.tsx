@@ -6,7 +6,8 @@ import AboutZeeshan from "@screens/AboutZeeshan";
 import SitePage from "@screens/SitePage";
 import ExplorePage from "@screens/ExplorePage";
 import PostDetails from "@screens/PostDetails";
-import { RootStackParamList } from "@navigation/navigationTypes"; // Adjust the import path based on your project structure
+import HackerLoginForm from "@screens/hackerloginform";
+import { RootStackParamList } from "@navigation/navigationTypes";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator<RootStackParamList>();
@@ -33,22 +34,65 @@ const AppNavigator: React.FC = () => {
   };
 
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) =>
-          tabBarIcon({ route, focused, color, size }),
-        tabBarActiveTintColor: "green",
-        tabBarInactiveTintColor: "crimson",
-      })}
+    <Tab.Navigator screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) =>
+        tabBarIcon({ route, focused, color, size }),
+      tabBarActiveTintColor: "green",
+      tabBarInactiveTintColor: "crimson",
+    })}
     >
-      <Tab.Screen
-        name="ExploreStack"
-        component={ExploreStack}
-        options={{ headerShown: false, title: "Explore" }}
-      />
-      <Tab.Screen name="Site" component={SitePage} />
-      <Tab.Screen name="Zeeshan" component={AboutZeeshan} />
+      <Tab.Screen name="Login" component={HackerLoginForm} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
+      <Tab.Screen name="Main" component={MainTabNavigator} options={{ headerShown: false, tabBarStyle: { display: 'none' } }} />
     </Tab.Navigator>
+  );
+};
+
+const MainTabNavigator: React.FC = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Explore"
+        component={ExploreStack}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Explore',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Site"
+        component={SitePage}
+        options={{
+          tabBarLabel: 'Site',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="globe-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Zeeshan"
+        component={AboutZeeshan}
+        options={{
+          tabBarLabel: 'Zeeshan',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-circle" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
+
+const TabNavigator: React.FC = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ExploreStack" component={ExploreStack} options={{ headerShown: false, title: "Explore" }} />
+      <Stack.Screen name="Site" component={SitePage} />
+      <Stack.Screen name="Zeeshan" component={AboutZeeshan} />
+    </Stack.Navigator>
   );
 };
 

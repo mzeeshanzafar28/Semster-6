@@ -57,6 +57,7 @@ export default function HackerLoginForm() {
                 })
                     .then(() => {
                         Alert.alert("Message", "Successfully Registered, continue setup.");
+                        navigation.navigate('RegistrationComponent');
 
                     })
                     .catch((error) => {
